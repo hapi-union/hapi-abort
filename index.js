@@ -2,10 +2,6 @@ const pkg = require('./package.json')
 exports.plugin = {
   pkg,
   register: (server, options = {}) => {
-    // const defaultConvert = (request, h) => {
-    //   const { response } = request
-
-    // }
     const { assign = 'abort', convert = (request, h) => h.continue } = options
     class Abort extends Error {
       constructor (data = {}) {
