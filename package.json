@@ -1,0 +1,23 @@
+{
+  "name": "hapi-abort",
+  "version": "0.0.2",
+  "description": "hapi abort",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hapi-union/hapi-abort.git"
+  },
+  "keywords": [
+    "hapi",
+    "abort"
+  ],
+  "author": "136177121@qq.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hapi-union/hapi-abort/issues"
+  },
+  "homepage": "https://github.com/hapi-union/hapi-abort#readme"
+}
