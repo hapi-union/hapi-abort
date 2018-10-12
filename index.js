@@ -2,12 +2,16 @@ const pkg = require('./package.json')
 exports.plugin = {
   pkg,
   register: (server, options = {}) => {
-    const { assign = 'abort', flag = 'abortFlag' } = options
+    // const defaultConvert = (request, h) => {
+    //   const { response } = request
+
+    // }
+    const { assign = 'abort', convert = (request, h) => h.continue } = options
     class Abort extends Error {
       constructor (data = {}) {
         super()
         this.data = data
-        this[flag] = true
+        this.isAbort = true
       }
     }
     if (assign) {
@@ -19,11 +23,7 @@ exports.plugin = {
       })
     }
     server.ext('onPreResponse', (request, h) => {
-      const { response } = request
-      if (response.isBoom && response[flag]) {
-        return request.response.data
-      }
-      return h.continue
+      return convert(request, h)
     })
     server.expose('Abort', Abort)
   }
