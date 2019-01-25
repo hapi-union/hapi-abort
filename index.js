@@ -1,4 +1,20 @@
 const pkg = require('./package.json')
+const convertJoiErrors = (details) => {
+  const maps = {}
+  const errors = []
+  details.forEach(item => {
+    const { message, path = [] } = item
+    const field = path[0]
+    if (!maps[field]) {
+      maps[field] = true
+      errors.push({
+        field: field,
+        message
+      })
+    }
+  })
+  return errors
+}
 exports.plugin = {
   pkg,
   register: (server, options = {}) => {
@@ -19,7 +35,7 @@ exports.plugin = {
       })
     }
     server.ext('onPreResponse', (request, h) => {
-      return convert(request, h)
+      return convert(request, h, { convertJoiErrors })
     })
     server.expose('Abort', Abort)
   }
